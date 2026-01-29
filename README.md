@@ -23,6 +23,7 @@ You will be asked about basic information:
 | requires_minimum_pf_version | Which version(s) of PowerFlow will this SyncPack support? |
 | dev_container_source | Use SL External if you are not a ScienceLogic employee |
 | dev_container_version | dev_container_version image version. i.e. for PF 2.4.1, the version should be 2.4.1 |
+| include_mcp_components | Boolean determining to include MCP functionality |
 
 Visual Studio Code
 ================================
@@ -164,3 +165,47 @@ The generated package includes PyCharm configuration settings to improve the Syn
 4. Configure the docker-compose.yml file located in .pycharm_devcontainer/docker-compose.yml as a Docker Compose Remote Python interpreter. Follow the instruction in [PyCharm official documentation](https://www.jetbrains.com/help/pycharm/using-docker-compose-as-a-remote-interpreter.html#docker-compose-remote).
 5. Select the interpreter created in the step 4 as default for your workspace
 6. Your environment should now be ready
+
+
+Model Context Protocol (MCP) 
+================================
+
+The cookiecutter includes support for embedding MCP components within SyncPacks to enhance AI-powered development workflows.
+
+## SAMCP Components Directory Structure
+
+```
+samcp_components/
+├── prompts/
+│   └── prompts.py
+├── resources/
+│   └── resources.py
+├── templates/
+│   └── templates.py
+└── tools/
+    └── tools.py
+```
+
+The `samcp_components` directory provides a standardized framework for building modular, reusable components within your SyncPack.
+
+**Prompts** (`prompts/prompts.py`)
+- Extend `BasePrompt` for handling user interactions and input processing
+- Example: `DummyPrompt` class with `dummy_function(name: str)` for placeholder text generation
+- Used for creating interactive elements and generating dynamic prompts for AI interactions
+
+**Resources** (`resources/resources.py`)
+- Extend `BaseResource` for managing data sources and external resources
+- Example: `DummyResource` class with `dummy_function()` returning static data
+- Used for providing read-only access to data that AI models can reference (databases, files, APIs, documentation)
+
+**Templates** (`templates/templates.py`)
+- Extend `BaseTemplate` for generating formatted output and content
+- Example: `DummyTemplate` class with `dummy_function(name: str)` for content generation
+- Used for creating structured output formats and reusable content templates
+
+**Tools** (`tools/tools.py`)
+- Extend `BaseTool` for executing specific operations and utilities
+- Example: `DummyTool` class with `dummy_function(name: str, config: str)` returning configuration data
+- Used for performing actions that modify state or execute operations (create files, send emails, run commands)
+
+All components include dummy implementations as starting points that should be customized for your specific use case.
