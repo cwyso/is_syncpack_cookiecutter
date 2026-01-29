@@ -16,7 +16,6 @@ def remove_mcp_components():
         if os.path.exists(samcp_path):
             try:
                 shutil.rmtree(samcp_path)
-                print("MCP components removed successfully")
             except Exception as err:
                 print(
                     f"Issue encountered when attempting to remove MCP components: {err}"
